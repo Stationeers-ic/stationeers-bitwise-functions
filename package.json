@@ -1,5 +1,5 @@
 {
-  "name": "ic10",
+  "name": "ic10-precise",
   "type": "module",
   "version": "4.0.0",
   "description": "ic10 interpreter",
@@ -12,9 +12,6 @@
   "scripts": {
     "prepublish": "prettier . --write",
     "watch": "tsc -w",
-    "build:node": "bun build ./src/index.ts --outdir ./build --target node --minify",
-    "build:bun": "bun build ./src/index.ts --outdir ./build --target bun --minify",
-    "build:browser": "bun build ./src/index.ts --outdir ./build --minify",
     "build": "tsc",
     "test": "bun test",
     "nodemon": "nodemon src/tests/dev.ts",
@@ -22,13 +19,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Stationeers-ic/ic10.git"
+    "url": "git+https://github.com/Stationeers-ic/ic10-precise.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Stationeers-ic/ic10/issues"
+    "url": "https://github.com/Stationeers-ic/ic10-precise/issues"
   },
   "exclude": [
     ".idea",
@@ -36,7 +33,7 @@
     ".project-manager",
     ".ic10"
   ],
-  "homepage": "https://github.com/Stationeers-ic/ic10#readme",
+  "homepage": "https://github.com/Stationeers-ic/ic10-precise#readme",
   "nodemonConfig": {
     "execMap": {
       "ts": "bun"
@@ -48,18 +45,10 @@
   "devDependencies": {
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/bun": "^1.0.8",
-    "@types/crc": "^3.8.3",
-    "@types/uuid": "^9.0.8",
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
   },
-  "dependencies": {
-    "crc-32": "^1.2.2",
-    "dot-prop": "^8.0.2",
-    "eventemitter3": "^5.0.1",
-    "uuid": "^9.0.1",
-    "zod": "^3.22.4"
-  }
+  "dependencies": {}
 }
