@@ -50,5 +50,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/benchmark": "^2.1.5",
+    "benchmark": "^2.1.4"
+  }
 }
