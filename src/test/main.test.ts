@@ -1,0 +1,68 @@
+import { describe, expect, test } from "bun:test"
+import { and, sll, srl } from "../index"
+import { SignVariable, UnSignVariable } from "../functions"
+
+describe("internal", () => {
+	test("SignVariable", () => {
+		expect(SignVariable(0).toString(2)).toBe("0")
+		expect(SignVariable(0b10010).toString(2)).toBe("10010")
+		expect(SignVariable(-0b1).toString(2)).toBe("".padStart(64, "1"))
+		expect(SignVariable(-0b10011101).toString(2)).toBe("01100011".padStart(64, "1"))
+	})
+	test("unSignVariable", () => {
+		expect(UnSignVariable(SignVariable(0))).toBe(0n)
+		expect(UnSignVariable(SignVariable(2555))).toBe(2555n)
+		expect(UnSignVariable(SignVariable(-1))).toBe(-1n)
+		expect(UnSignVariable(SignVariable(-2500))).toBe(-2500n)
+	})
+})
+
+describe("arithmetic", () => {
+	test("sll", () => {
+		expect(sll(1, 2)).toBe(4)
+		expect(sll(-1, 1)).toBe(-2)
+		expect(sll(1, 51)).toBe(0x8000000000000)
+		expect(sll(1, 52)).toBe(0x10000000000000)
+		expect(sll(-0x10000000000000, 1)).toBe(-0x20000000000000)
+		expect(sll(1, 53)).toBe(-0x20000000000000)
+		expect(sll(1, 54)).toBe(0)
+		expect(sll(1, 55)).toBe(0)
+		expect(sll(1, 64)).toBe(1)
+		expect(sll(1, 70)).toBe(0b1000000)
+		expect(sll(0b1011, 2)).toBe(0b101100)
+		expect(sll(0b1011, 3)).toBe(0b1011000)
+		expect(sll(0b101, 51)).toBe(-0x18000000000000)
+		expect(sll(-9223372036854777000, 1)).toBe(null)
+		expect(sll(9223372036854777000, 1)).toBe(null)
+		expect(sll(1, 2147483648)).toBe(null)
+		expect(sll(1, -2147483649)).toBe(null)
+	})
+	test("srl", () => {
+		expect(srl(0x10000000000000, 1)).toBe(0x8000000000000)
+		expect(srl(-0x20000000000000, 1)).toBe(0)
+		expect(srl(0b101, 1)).toBe(0b10)
+		expect(srl(1, 1)).toBe(0)
+		expect(srl(-1, 2)).toBe(0xfffffffffffff)
+		expect(srl(-1, 1)).toBe(0x1fffffffffffff)
+		expect(srl(-1, 45)).toBe(0x1ff)
+		expect(srl(-1, 50)).toBe(0b1111)
+		expect(srl(-1, 53)).toBe(0b1)
+		expect(srl(-1, 54)).toBe(0b0)
+		expect(srl(-1, 55)).toBe(0b0)
+		expect(srl(-9223372036854777000, 1)).toBe(null)
+		expect(srl(9223372036854777000, 1)).toBe(null)
+		expect(srl(1, 2147483648)).toBe(null)
+		expect(srl(1, -2147483649)).toBe(null)
+	})
+	test("sra", () => {})
+	test("and", () => {
+		expect(and(1, 1)).toBe(1)
+		expect(and(0b1100, 0b0110)).toBe(0b0100)
+		expect(and(0b1101, 0b1111)).toBe(0b1101)
+		expect(and(-1, -1)).toBe(-1)
+	})
+	test("or", () => {})
+	test("xor", () => {})
+	test("nor", () => {})
+	test("not", () => {})
+})
