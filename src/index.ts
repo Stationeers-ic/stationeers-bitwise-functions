@@ -1,5 +1,6 @@
 import { GetVariableInt, GetVariableLong, LongToDouble } from "./functions"
 
+// SLA is same as SLL
 export function sll(x: number, y: number): null | number {
 	const vL = GetVariableLong(x)
 	const vI = GetVariableInt(y)
