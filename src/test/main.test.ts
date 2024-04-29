@@ -2,7 +2,6 @@ import { describe, expect, test } from "bun:test"
 import { and, nor, not, or, sll, sra, srl, xor } from "../index"
 import { DoubleToLong, GetVariableInt, GetVariableLong, LongToDouble } from "../functions"
 
-
 describe("functions", () => {
 	test("DoubleToLong", () => {
 		expect(DoubleToLong(1n, true)).toBe(1n)
@@ -45,7 +44,6 @@ describe("functions", () => {
 		expect(GetVariableInt(9223372036854777000)).toBe(null)
 		expect(GetVariableInt(-9223372036854777000)).toBe(null)
 	})
-
 })
 
 describe("arithmetic", () => {
@@ -156,6 +154,3 @@ describe("arithmetic", () => {
 		expect(not(9223372036854777000)).toBe(null)
 	})
 })
-
-
-

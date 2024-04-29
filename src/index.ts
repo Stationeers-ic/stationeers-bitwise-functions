@@ -1,6 +1,5 @@
 import { GetVariableInt, GetVariableLong, LongToDouble } from "./functions"
 
-
 export function sll(x: number, y: number): null | number {
 	const vL = GetVariableLong(x)
 	const vI = GetVariableInt(y)
@@ -49,4 +48,3 @@ export function not(x: number): null | number {
 	if (vL == null) return null
 	return LongToDouble(~vL)
 }
-
