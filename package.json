@@ -1,14 +1,10 @@
 {
-  "name": "ic10-precise",
-  "type": "module",
+  "author": "Aidan647",
+  "name": "stationeers-bitwise-functions",
+  "description": "Bitwise Operations in TypeScript (JavaScript) for Stationeers",
+  "private": true,
   "version": "1.0.0",
-  "description": "ic10 interpreter",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "engines": {
-    "bun": ">=1.0.20",
-    "node": ">=20.10.0"
-  },
+  "type": "module",
   "scripts": {
     "format": "prettier . --write",
     "watch": "bun test --watch",
@@ -16,15 +12,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Stationeers-ic/ic10-precise.git"
+    "url": "git+https://github.com/Stationeers-ic/stationeers-bitwise-functions.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "typescript",
+    "bitwise-operators",
+    "csharp"
+  ],
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Stationeers-ic/ic10-precise/issues"
+    "url": "https://github.com/Stationeers-ic/stationeers-bitwise-functions/issues"
   },
-  "homepage": "https://github.com/Stationeers-ic/ic10-precise#readme",
+  "homepage": "https://github.com/Stationeers-ic/stationeers-bitwise-functions#readme",
   "devDependencies": {
     "@types/bun": "^1.0.8",
     "prettier": "^3.2.5",
