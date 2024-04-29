@@ -1,5 +1,7 @@
-const bitLimit = 0xffffffffffffffffn // 64bits, discard all above
-const signBit = 0x8000000000000000n // 64'th bit, sign bit
+const bitLimit = 0x7fffffffffffffffn // 63bits, discard all above
+export const signBit = 0x8000000000000000n // 64'th bit, sign bit
+const padBits = 0xffe0000000000000n //
+const padBit = 0x20000000000000n //
 
 export function GetVariableLong(x: number | bigint, signed = true): bigint | null {
 	const value = BigInt(x)
@@ -12,9 +14,20 @@ export function GetVariableInt(x: number | bigint): bigint | null {
 	return value
 }
 export function DoubleToLong(x: bigint, signed: boolean): bigint {
-	x &= bitLimit
-	let num = x % 9007199254740992n
-	if (!signed) num &= 0x3fffffffffffffn // 18014398509481983
+	// if (x > 0n)
+	// x &= bitLimit
+	let num = x % 0x20000000000000n // 9007199254740992
+	// check for js -0, -0 === 0 so set to 0
+	if (num === 0n) num = 0n
+	if (!signed) {
+		if (num < 0n) {
+			num = flipBits(num, 64n)
+			num |= padBit * 2n // 9007199254740992
+			num = flipBits(num, 64n)
+			num |= padBits
+		}
+		num &= 0x3fffffffffffffn // 18014398509481983
+	}
 	return num
 }
 export function LongToDouble(x: bigint): number {
@@ -25,20 +38,6 @@ export function LongToDouble(x: bigint): number {
 	return Number(x)
 }
 
-export function SignVariable(x: number | bigint): bigint {
-	let value = BigInt(x) & bitLimit
-	if (value >= 0n) return value
-	// value = -value
-	value = ~value
-	value ^= bitLimit
-	return value
-}
-
-export function UnSignVariable(x: number | bigint): bigint {
-	let value = BigInt(x) & bitLimit
-	if ((value & signBit) !== signBit) return value
-	// value = -value
-	value ^= bitLimit
-	value = ~value
-	return value
+function flipBits(v: bigint, digits: bigint) {
+	return ~v & ((2n ** digits) - 1n)
 }
