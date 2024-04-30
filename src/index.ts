@@ -1,12 +1,13 @@
 import { GetVariableInt, GetVariableLong, LongToDouble } from "./functions"
 
-// SLA is same as SLL
 export function sll(x: number, y: number): null | number {
 	const vL = GetVariableLong(x)
 	const vI = GetVariableInt(y)
 	if (vL == null || vI == null) return null
 	return LongToDouble(vL << vI % 64n)
 }
+// SLA is same as SLL
+export const sla = sll
 export function srl(x: number, y: number): null | number {
 	const vL = GetVariableLong(x, false)
 	const vI = GetVariableInt(y)

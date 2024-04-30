@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { and, nor, not, or, sll, sra, srl, xor } from "../index"
+import { and, nor, not, or, sla, sll, sra, srl, xor } from "../index"
 import { DoubleToLong, GetVariableInt, GetVariableLong, LongToDouble } from "../functions"
 
 describe("functions", () => {
@@ -65,6 +65,9 @@ describe("arithmetic", () => {
 		expect(sll(9223372036854777000, 1)).toBe(null)
 		expect(sll(1, 2147483648)).toBe(null)
 		expect(sll(1, -2147483649)).toBe(null)
+	})
+	test("sla", () => {
+		expect(sll === sla).toBe(true)
 	})
 	test("srl", () => {
 		expect(srl(0x10000000000000, 1)).toBe(0x8000000000000)
